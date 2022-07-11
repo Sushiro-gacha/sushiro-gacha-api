@@ -1,14 +1,13 @@
 package main
 
+import (
+	"log"
+	"net/http"
+
+	"github.com/Sushiro-gacha/sushiro-gacha-api/app/controller"
+)
+
 func main() {
-	StartMainServer()
-}
-
-func StartMainServer() {
-	// ここでルーティングを行う
-	// controllerのメソッドをhttp.Hundlefuncで登録してみよう
-	// 公式：https://pkg.go.dev/net/http
-
-	// errorを返すよう設定
-	// return http.ListenAndServe(":8080", nil)
+	http.HandleFunc("/home/hello/", controller.RequestHello(w http.ResponseWriter, r *http.Request))
+	log.Fatal(http.ListenAndServe(":8000", nil))
 }
