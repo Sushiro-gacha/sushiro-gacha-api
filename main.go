@@ -4,10 +4,19 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/Sushiro-gacha/sushiro-gacha-api/app/controller"
+	controller "github.com/Sushiro-gacha/sushiro-gacha-api/app/controller"
 )
 
+// func HandllerHello() {
+// 	return practicecontroller.RequestHello()
+// }
 func main() {
-	http.HandleFunc("/home/hello/", controller.RequestHello(w http.ResponseWriter, r *http.Request))
+	StartMainServer()
+}
+
+func StartMainServer() {
+	http.HandleFunc("/home/price/", controller.GathaPrice)
+	//http.HandleFunc("/home/calorie/", controller.GachaCalories)
+
 	log.Fatal(http.ListenAndServe(":8000", nil))
 }
