@@ -7,17 +7,12 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+
+	"github.com/Sushiro-gacha/sushiro-gacha-api/domain/model"
 )
 
-type Sushi struct {
-	ID    int    `json:"id"`
-	Name  string `json:"name"`
-	Price int    `json:"price"`
-	Stock int    `json:"stock"`
-}
-
 func formatter_json(data []byte) []byte {
-	var sushi []Sushi
+	var sushi []model.Sushi
 	if err := json.Unmarshal(data, &sushi); err != nil {
 		log.Fatal(err)
 	}
@@ -28,18 +23,12 @@ func formatter_json(data []byte) []byte {
 	return json_data
 }
 
-func get_sushi() []byte {
+func GachaPrice(w http.ResponseWriter, r *http.Request) {
 	jsonFromFile, err := ioutil.ReadFile("./app/controller/sample.json")
 	if err != nil {
 		log.Fatal(err)
 	}
-	res := formatter_json(jsonFromFile)
-
-	return res
-}
-
-func GathaPrice(w http.ResponseWriter, r *http.Request) {
-	sushi_json := get_sushi()
+	sushi_json := formatter_json(jsonFromFile)
 
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(sushi_json)
