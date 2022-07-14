@@ -16,10 +16,16 @@ type Sushi struct {
 	Stock int    `json:"stock"`
 }
 
-type Calorie struct {
-	ID      int    `json:"id"`
-	Name    string `json:"name"`
-	Calorie int    `json:"calorie"`
+func formatter_json(data []byte) []byte {
+	var sushi []Sushi
+	if err := json.Unmarshal(data, &sushi); err != nil {
+		log.Fatal(err)
+	}
+	json_data, err := json.Marshal(sushi)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return json_data
 }
 
 func get_sushi() []byte {
@@ -27,30 +33,9 @@ func get_sushi() []byte {
 	if err != nil {
 		log.Fatal(err)
 	}
-	println(jsonFromFile)
-	var sushi []Sushi
-	if err = json.Unmarshal(jsonFromFile, &sushi); err != nil {
-		log.Fatal(err)
-	}
-	res, err := json.Marshal(sushi)
-	if err != nil {
-		log.Fatal(err)
-	}
+	res := formatter_json(jsonFromFile)
+
 	return res
-}
-
-func get_calorie() Calorie {
-	jsonFromFile, err := ioutil.ReadFile("./sample2.json")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	var jsonData Calorie
-	err = json.Unmarshal(jsonFromFile, &jsonData)
-	if err != nil {
-		log.Fatal(err)
-	}
-	return jsonData
 }
 
 func GathaPrice(w http.ResponseWriter, r *http.Request) {
@@ -60,8 +45,6 @@ func GathaPrice(w http.ResponseWriter, r *http.Request) {
 	w.Write(sushi_json)
 }
 
-func GachaCalories(w http.ResponseWriter, r *http.Request) Calorie {
-	calorie_json := get_calorie()
+// func GachaCalories(w http.ResponseWriter, r *http.Request) Calorie {
 
-	return calorie_json
-}
+// }
