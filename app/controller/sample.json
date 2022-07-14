@@ -1,10 +1,8 @@
-{
-    "Tuna": [
-        {
-            "id": "1",
-            "name" : "Tuna",
-            "price" : 1000,
-            "stock" : 100
-        }
-    ]
-}
+[
+    {
+        "id": 1,
+        "name" : "Tuna",
+        "price" : 1000,
+        "stock" : 100
+    }
+]

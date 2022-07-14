@@ -23,11 +23,16 @@ type Calorie struct {
 }
 
 func get_sushi() []byte {
-	jsonFromFile, err := ioutil.ReadFile("app/controller/sample.json")
+	jsonFromFile, err := ioutil.ReadFile("./app/controller/sample.json")
 	if err != nil {
 		log.Fatal(err)
 	}
-	res, err := json.Marshal(jsonFromFile)
+	println(jsonFromFile)
+	var sushi []Sushi
+	if err = json.Unmarshal(jsonFromFile, &sushi); err != nil {
+		log.Fatal(err)
+	}
+	res, err := json.Marshal(sushi)
 	if err != nil {
 		log.Fatal(err)
 	}
