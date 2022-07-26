@@ -5,5 +5,5 @@ type SushiEntity struct {
 	Category string
 	Name     string
 	Price    int
-	Calories int
+	Calorie  int
 }
