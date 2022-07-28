@@ -2,7 +2,7 @@ package service
 
 import (
 	"github.com/Sushiro-gacha/sushiro-gacha-api/domain/model"
-	repository "github.com/Sushiro-gacha/sushiro-gacha-api/domain/repository"
+	"github.com/Sushiro-gacha/sushiro-gacha-api/domain/repository"
 )
 
 func FetchSushiData() []model.Sushi {

@@ -1,7 +1,5 @@
 package model
 
-// ここにmodelの情報を定義する
-
 type Sushi struct {
 	Id       int    `json:"id"`
 	Category string `json:"category"`
