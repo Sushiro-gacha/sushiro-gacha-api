@@ -6,7 +6,6 @@ import (
 	"net/http"
 
 	"github.com/Sushiro-gacha/sushiro-gacha-api/domain/service"
-	"github.com/Sushiro-gacha/sushiro-gacha-api/domain/model"
 )
 
 func GachaPrice(w http.ResponseWriter, r *http.Request) {
