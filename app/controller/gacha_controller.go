@@ -4,13 +4,17 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/Sushiro-gacha/sushiro-gacha-api/domain/service"
 )
 
 func GachaPrice(w http.ResponseWriter, r *http.Request) {
 	sushiList := service.FetchSushiData()
-	sushiJson, err := json.Marshal(sushiList)
+	queryMap := r.URL.Query()
+	value, _ := strconv.Atoi(queryMap["value"][0])
+	sushiPriceList := service.ChoiseSushiPriceCondition(sushiList, value)
+	sushiJson, err := json.Marshal(sushiPriceList)
 	if err != nil {
 		log.Fatal(err)
 	}

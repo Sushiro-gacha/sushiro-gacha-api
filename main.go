@@ -13,7 +13,8 @@ func main() {
 
 func StartMainServer() {
 	http.HandleFunc("/gacha/price/", controller.GachaPrice)
+
 	//http.HandleFunc("/home/calorie/", controller.GachaCalories)
 
-	log.Fatal(http.ListenAndServe("127.0.0.1:8080", nil))
+	log.Fatal(http.ListenAndServe("127.0.0.1:8000", nil))
 }

@@ -5,6 +5,15 @@ import (
 	"github.com/Sushiro-gacha/sushiro-gacha-api/domain/repository"
 )
 
+func ChoiseSushiPriceCondition(sushiList []model.Sushi, maxPrice int) []model.Sushi {
+	var resultSushiList []model.Sushi
+	for sumPrice := 0; sumPrice < maxPrice; {
+		resultSushiList = append(resultSushiList, sushiList[randomNumber])
+		sumPrice = sumPrice + sushiList[randomNumber].Price
+	}
+	return resultSushiList
+}
+
 func FetchSushiData() []model.Sushi {
 	var sushiList []model.Sushi
 	sushiEntityList := repository.FetchSushiData()
