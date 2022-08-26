@@ -1,34 +1,21 @@
 package service
 
 import (
-	"log"
 	"math/rand"
-	"net/http"
-	"net/url"
 	"strconv"
 
 	"github.com/Sushiro-gacha/sushiro-gacha-api/domain/model"
 	"github.com/Sushiro-gacha/sushiro-gacha-api/domain/repository"
 )
 
-func FetchGachaResult(w http.ResponseWriter, r *http.Request) []model.Sushi {
+func FetchGachaResult(queryValue map[string][]string, err error) ([]model.Sushi, error) {
 	var totalBudget int
 	sushiList := fetchSushiData()
-	queryMap, err := url.ParseQuery(r.URL.RawQuery)
-	if err != nil {
-		log.Fatal(err)
+	if queryValue["value"] != nil {
+		totalBudget, err = strconv.Atoi(queryValue["value"][0])
 	}
-	if queryMap["value"] != nil {
-		totalBudget, err = strconv.Atoi(queryMap["value"][0])
-	}
-	if err != nil {
-		log.Fatal(err)
-	}
-	//ここまで通ってる
 	sushiPriceList := choiseSushiPriceCondition(sushiList, totalBudget)
-	// output: [0/0]0x0
-	println(sushiPriceList)
-	return sushiPriceList
+	return sushiPriceList, err
 }
 
 func choiseSushiPriceCondition(sushiList []model.Sushi, totalBudget int) []model.Sushi {
