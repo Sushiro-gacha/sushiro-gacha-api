@@ -16,13 +16,11 @@ func GachaPrice(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	sushiPriceList, err := service.FetchGachaResult(queryValue, err)
+	sushiPriceList, err := service.FetchGachaResult(queryValue)
 	if err != nil {
 		log.Fatal(err)
 	}
 	sushiJson, err := json.Marshal(sushiPriceList)
-	// output: [4/8]0xc0000165d0
-	println(sushiJson)
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -8,7 +8,8 @@ import (
 	"github.com/Sushiro-gacha/sushiro-gacha-api/domain/repository"
 )
 
-func FetchGachaResult(queryValue map[string][]string, err error) ([]model.Sushi, error) {
+func FetchGachaResult(queryValue map[string][]string) ([]model.Sushi, error) {
+	var err error
 	var totalBudget int
 	sushiList := fetchSushiData()
 	if queryValue["value"] != nil {
@@ -25,7 +26,7 @@ func choiseSushiPriceCondition(sushiList []model.Sushi, totalBudget int) []model
 	for {
 		underValueSushiList := []model.Sushi{}
 		for _, sushi := range sushiList {
-			if sushi.Price < restBudget {
+			if sushi.Price <= restBudget {
 				underValueSushiList = append(underValueSushiList, sushi)
 			}
 		}
