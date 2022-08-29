@@ -19,20 +19,31 @@ func FetchGachaResult(queryValue map[string][]string, err error) ([]model.Sushi,
 }
 
 func choiseSushiPriceCondition(sushiList []model.Sushi, totalBudget int) []model.Sushi {
-	var resultSushiList []model.Sushi
-	for sumPrice := 0; sumPrice > totalBudget; {
-		randomNumber := rand.Intn(len(sushiList)) + 1
-		sushiChild := sushiList[randomNumber]
-		sumPrice = sumPrice + sushiChild.Price
-		if sumPrice < totalBudget {
-			resultSushiList = append(resultSushiList, sushiChild)
+	resultSushiList := []model.Sushi{}
+	restBudget := totalBudget
+	//Put sushiList's childs which is within rest of total budget into underValueSushiList until there are no more childs to add.
+	for {
+		underValueSushiList := []model.Sushi{}
+		for _, sushi := range sushiList {
+			if sushi.Price < restBudget {
+				underValueSushiList = append(underValueSushiList, sushi)
+			}
 		}
+		if len(underValueSushiList) == 0 {
+			break
+		}
+		//Choise one child from underValueSushiList and put it into resultList
+		randomNumber := rand.Intn(len(underValueSushiList)) + 1
+		sushiChild := underValueSushiList[randomNumber]
+		resultSushiList = append(resultSushiList, sushiChild)
+		//Substract Chiled's cost from rest-budget
+		restBudget = restBudget - sushiChild.Price
 	}
 	return resultSushiList
 }
 
 func fetchSushiData() []model.Sushi {
-	var sushiList []model.Sushi
+	sushiList := []model.Sushi{}
 	sushiEntityList := repository.FetchSushiData()
 	for _, entity := range sushiEntityList {
 		sushi := model.Sushi{}
@@ -41,7 +52,6 @@ func fetchSushiData() []model.Sushi {
 		sushi.Name = entity.Name
 		sushi.Price = entity.Price
 		sushi.Calorie = entity.Calorie
-
 		sushiList = append(sushiList, sushi)
 	}
 	return sushiList
