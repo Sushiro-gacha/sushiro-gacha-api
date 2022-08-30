@@ -34,7 +34,7 @@ func choiseSushiPriceCondition(sushiList []model.Sushi, totalBudget int) []model
 			break
 		}
 		//Choise one child from underValueSushiList and put it into resultList
-		randomNumber := rand.Intn(len(underValueSushiList)) + 1
+		randomNumber := rand.Intn(len(underValueSushiList))
 		sushiChild := underValueSushiList[randomNumber]
 		resultSushiList = append(resultSushiList, sushiChild)
 		//Substract Chiled's cost from rest-budget
