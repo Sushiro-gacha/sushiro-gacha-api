@@ -1,0 +1,9 @@
+version: "3"
+services:
+  mysql:
+    build: ./mysql/    
+    volumes:
+      - ./mysql/DB:/docker-entrypoint-initdb.d
+    image: sushi_mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
