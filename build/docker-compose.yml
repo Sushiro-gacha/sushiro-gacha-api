@@ -1,12 +1,12 @@
-version: "3"
+version: '3'
 services:
-  mysql:
-    build: ./mysql/    
-    volumes:
-      - ./mysql/DB:/docker-entrypoint-initdb.d
-    image: sushi_mysql
+  db:
+    image: mysql:8.0.21
+    ports:
+      - '3306:3306'
+    command: --default-authentication-plugin=mysql_native_password
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: test_database
-      MYSQL_USER: docker
-      MYSQL_PASSWORD: docker
+      MYSQL_USER: 'webuser'
+      MYSQL_PASSWORD: 'webpass'
+      MYSQL_ROOT_PASSWORD: 'pass'
+      MYSQL_DATABASE: 'go_mysql8_development'
