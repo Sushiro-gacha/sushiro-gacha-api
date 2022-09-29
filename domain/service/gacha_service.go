@@ -4,6 +4,7 @@ import (
 	"math/rand"
 	"strconv"
 
+	database "github.com/Sushiro-gacha/sushiro-gacha-api/db"
 	"github.com/Sushiro-gacha/sushiro-gacha-api/domain/model"
 	"github.com/Sushiro-gacha/sushiro-gacha-api/domain/repository"
 )
@@ -45,7 +46,7 @@ func choiseSushiPriceCondition(sushiList []model.Sushi, totalBudget int) []model
 
 func fetchSushiData() []model.Sushi {
 	sushiList := []model.Sushi{}
-	sushiEntityList := repository.FetchSushiData()
+	sushiEntityList := repository.FetchSushiData(database.Db)
 	for _, entity := range sushiEntityList {
 		sushi := model.Sushi{}
 		sushi.Id = entity.Id
@@ -56,4 +57,9 @@ func fetchSushiData() []model.Sushi {
 		sushiList = append(sushiList, sushi)
 	}
 	return sushiList
+}
+
+func TestFetchSushi() []model.SushiEntity {
+	testSushiEntity := repository.FetchSushiData(database.Db)
+	return testSushiEntity
 }
