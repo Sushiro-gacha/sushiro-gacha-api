@@ -23,10 +23,10 @@ func init() {
 	user := os.Getenv("DB_USER")
 	// password := os.Getenv("DB_PASSWORD")
 	host := os.Getenv("DB_HOST")
-	// port := os.Getenv("DB_PORT")
+	port := os.Getenv("DB_PORT")
 	database_name := os.Getenv("DB_DATABASE_NAME")
-	// + ":" + port, ":" + password
-	dbconf := user + "@tcp(" + host + ")/" + database_name + "?charset=utf8mb4"
+	// , ":" + password
+	dbconf := user + "@tcp(" + host + ":" + port + ")/" + database_name + "?charset=utf8mb4"
 
 	if Db, err = sql.Open("mysql", dbconf); err != nil {
 		log.Fatal("Db open error:", err.Error())
@@ -44,7 +44,6 @@ func checkConnect(count uint) {
 		time.Sleep(time.Second * 2)
 		count--
 		log.Printf("failed to ping by error '%#v'", err)
-		//fmt.Printf("retry... count:%v\n", count)
 		checkConnect(count)
 	}
 }
