@@ -3,16 +3,16 @@ USE sushidb;
 
 CREATE TABLE IF NOT EXISTS sushi
 (
-    id       INT PRIMARY KEY AUTO_INCREMENT, 
+    id       INT PRIMARY KEY AUTO_INCREMENT,
     category VARCHAR(255) NOT NULL,
     name     VARCHAR(255) NOT NULL,
-    price    INT,
-    calorie  INT
+    price    INT NOT NULL,
+    calorie  INT NOT NULL
 );
 
-INSERT INTO sushi VALUES 
-(0, "サーモンマウンテン", "期間限定/エリア限定", 330, 211), 
-(0, "えび天マウンテン", "期間限定/エリア限定", 330, 383), 
-(0, "天然インド鮪中落ちてんこ盛り", "期間限定/エリア限定", 165, 73), 
-(0, "うなきゅう巻", "期間限定/エリア限定", 165, 199), 
-(0, "大切り煮穴子", "期間限定/エリア限定", 165, 66);
+INSERT INTO sushi (category, name, price, calorie) VALUES
+("期間限定/エリア限定", "サーモンマウンテン", 330, 211),
+("期間限定/エリア限定", "えび天マウンテン", 330, 383),
+("期間限定/エリア限定", "天然インド鮪中落ちてんこ盛り", 165, 73),
+("期間限定/エリア限定", "うなきゅう巻", 165, 199),
+("期間限定/エリア限定", "大切り煮穴子", 165, 66);
