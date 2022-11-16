@@ -27,3 +27,13 @@ func GachaPrice(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(sushiJson)
 }
+
+func TestDbConnect(w http.ResponseWriter, r *http.Request) {
+	sushiJson, err := json.Marshal(service.TestFetchSushi())
+	if err != nil {
+		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(sushiJson)
+}
