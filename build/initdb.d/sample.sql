@@ -1,18 +1,20 @@
-CREATE DATABASE IF NOT EXISTS sushidb;
-USE sushidb;
+CREATE USER dbuser WITH PASSWORD 'dbpass';
 
-CREATE TABLE IF NOT EXISTS sushi
+\c sushidb
+-- publcスキーマでsushi tableを作成
+CREATE TABLE sushi
 (
-    id       INT PRIMARY KEY AUTO_INCREMENT,
+    id       serial PRIMARY KEY,
     category VARCHAR(255) NOT NULL,
     name     VARCHAR(255) NOT NULL,
-    price    INT NOT NULL,
-    calorie  INT NOT NULL
+    price    INTEGER NOT NULL,
+    calorie  INTEGER NOT NULL
 );
+GRANT ALL ON sushi TO dbuser;
 
 INSERT INTO sushi (category, name, price, calorie) VALUES
-("期間限定/エリア限定", "サーモンマウンテン", 330, 211),
-("期間限定/エリア限定", "えび天マウンテン", 330, 383),
-("期間限定/エリア限定", "天然インド鮪中落ちてんこ盛り", 165, 73),
-("期間限定/エリア限定", "うなきゅう巻", 165, 199),
-("期間限定/エリア限定", "大切り煮穴子", 165, 66);
+('期間限定/エリア限定', 'サーモンマウンテン', 330, 211),
+('期間限定/エリア限定', 'えび天マウンテン', 330, 383),
+('期間限定/エリア限定', '天然インド鮪中落ちてんこ盛り', 165, 73),
+('期間限定/エリア限定', 'うなきゅう巻', 165, 199),
+('期間限定/エリア限定', '大切り煮穴子', 165, 66);

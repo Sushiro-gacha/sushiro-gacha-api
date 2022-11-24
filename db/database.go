@@ -9,7 +9,7 @@ import (
 
 	"github.com/joho/godotenv"
 
-	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/lib/pq"
 )
 
 var Db *sql.DB
@@ -25,9 +25,9 @@ func init() {
 	host := os.Getenv("DB_HOST")
 	port := os.Getenv("DB_PORT")
 	database_name := os.Getenv("DB_DATABASE_NAME")
-	dbconf := fmt.Sprintf(`%s:%s@tcp(%s:%s)/%s?charset=utf8mb4`, user, password, host, port, database_name)
+	dbconf := fmt.Sprintf(`user=%s password=%s host=%s port=%s dbname=%s sslmode=disable`, user, password, host, port, database_name)
 
-	if Db, err = sql.Open("mysql", dbconf); err != nil {
+	if Db, err = sql.Open("postgres", dbconf); err != nil {
 		log.Fatal("Db open error:", err.Error())
 	} else {
 		fmt.Println("db Open")
